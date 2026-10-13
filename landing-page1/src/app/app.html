@@ -1,0 +1,110 @@
+<header class="site-header">
+  <a class="brand" href="#main-content" aria-label="Bridge Collective home">Bridge Collective</a>
+
+  <button
+    class="menu-button"
+    #menuToggle
+    type="button"
+    [attr.aria-label]="isMenuOpen() ? 'Close navigation menu' : 'Open navigation menu'"
+    [attr.aria-expanded]="isMenuOpen()"
+    aria-controls="site-navigation"
+    (click)="toggleMenu()"
+  >
+    <img
+      [src]="isMenuOpen() ? '/icons/icon-close.svg' : '/icons/icon-menu.svg'"
+      alt=""
+      aria-hidden="true"
+    />
+  </button>
+</header>
+
+@if (isMenuOpen()) {
+  <div class="menu-overlay">
+    <button
+      class="menu-backdrop"
+      type="button"
+      aria-label="Close navigation menu"
+      tabindex="-1"
+      (click)="closeMenu()"
+    ></button>
+
+    <nav
+      id="site-navigation"
+      class="menu-panel"
+      aria-label="Main navigation"
+    >
+      <a
+        #firstMenuLink
+        href="#about"
+        (click)="closeMenu()"
+        (keydown.tab)="trapMenuFocus($event, 'first')"
+        (keydown.escape)="closeMenu()"
+      >About</a>
+      <a href="#our-work" (click)="closeMenu()" (keydown.escape)="closeMenu()">Our Work</a>
+      <a href="#partners" (click)="closeMenu()" (keydown.escape)="closeMenu()">Partners</a>
+      <a href="https://youtube.com" (click)="closeMenu()" (keydown.escape)="closeMenu()">Annual Report</a>
+      <a
+        #lastMenuLink
+        href="https://youtube.com"
+        (click)="closeMenu()"
+        (keydown.tab)="trapMenuFocus($event, 'last')"
+        (keydown.escape)="closeMenu()"
+      >Donate</a>
+    </nav>
+  </div>
+}
+
+<main id="main-content">
+  <section id="about" class="hero" aria-labelledby="hero-heading">
+    <h1 id="hero-heading">A classroom for every child.</h1>
+    <p>
+      We fund the schools, train the teachers, and measure what works — so every
+      child we reach today becomes a graduate tomorrow.
+    </p>
+  </section>
+
+  <section id="our-work" class="impact-grid" aria-label="Our impact">
+    <article id="partners" class="impact-card">
+      <div class="impact-card-top">
+        <img src="/icons/icon-sparkle.svg" alt="" aria-hidden="true" />
+        <p class="impact-value">2.4M</p>
+      </div>
+      <h2>Students reached</h2>
+      <p>Across 31 countries since 2011.</p>
+    </article>
+
+    <article class="impact-card">
+      <div class="impact-card-top">
+        <img src="/icons/icon-plus.svg" alt="" aria-hidden="true" />
+        <p class="impact-value">1,284</p>
+      </div>
+      <h2>Schools partnered</h2>
+      <p>In 14 countries, from Kenya to Guatemala.</p>
+    </article>
+
+    <article class="impact-card">
+      <div class="impact-card-top">
+        <img src="/icons/icon-arrow-right.svg" alt="" aria-hidden="true" />
+        <p class="impact-value">38K</p>
+      </div>
+      <h2>Teachers trained</h2>
+      <p>Equipped with modern tools and methodology.</p>
+    </article>
+
+    <article class="impact-card">
+      <div class="impact-card-top">
+        <img src="/icons/icon-trending-up.svg" alt="" aria-hidden="true" />
+        <p class="impact-value">3.1×</p>
+      </div>
+      <h2>Graduation lift</h2>
+      <p>Partner schools outperform national averages 3x.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>© 2026 Bridge Collective</p>
+  <p>Registered charity 12345678</p>
+</footer>
+
+<router-outlet />
